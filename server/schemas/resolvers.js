@@ -82,8 +82,10 @@ const resolvers = {
           { $push: { reactions: { reactionBody, username: context.user.username } } },
           { new: true, runValidators: true }
         );
+
         return updatedThought;
       }
+
       throw new AuthenticationError('You need to be logged in!');
     },
     addFriend: async (parent, { friendId }, context) => {
@@ -93,8 +95,10 @@ const resolvers = {
           { $addToSet: { friends: friendId } },
           { new: true }
         ).populate('friends');
+
         return updatedUser;
       }
+
       throw new AuthenticationError('You need to be logged in!');
     }
   }
